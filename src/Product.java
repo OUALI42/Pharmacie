@@ -2,9 +2,9 @@ public class Product extends Inventory {
     int id;
     String nom;
     float prix;
-    String quantiteStock;
+    int quantiteStock;
     String description;
-    Product(int id, String nom, float prix, String quantiteStock, String description) {
+    Product(int id, String nom, float prix, int quantiteStock, String description) {
         super();
         this.id = id;
         this.nom = nom;
