@@ -38,10 +38,13 @@ public class pharmacie {
         this.produits = produits;
     }
 
-//    void ShowProducts(){
+    void ShowProducts(){
 //        produits.sort(Comparator.comparing(Inventory::getName));
-//        for(Product p : produits){
-//            System.out.println(p.Name+"/ Quantité = "+p.Quantity+"/ Price = "+p.Price+"/ Category = "+p.Category+"/ Subcategory ="+p.Subcategory);
-//        }
-//    }
+        for(Inventory invent : produits){
+            for(Product produit : invent.getProduits()){
+                System.out.println(produit.nom+" // Quantité = "+produit.quantiteStock+" // Prix = "+produit.prix+" // Catégorie = "+invent.categorie+" // Sous-Catégorie ="+invent.sousCategorie);
+            }
+
+        }
+    }
 }

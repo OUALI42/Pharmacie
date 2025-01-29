@@ -14,7 +14,7 @@ public class Main {
 
             pharmacies Pharma = gson.fromJson(reader, pharmacies.class);
 
-            System.out.println(Pharma.pharmacie.getProduits().get(0).produits.get(0).nom);
+            Pharma.pharmacie.ShowProducts();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
