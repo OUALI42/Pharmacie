@@ -1,5 +1,3 @@
-package src;
-
 import java.util.List;
 
 public class Pharmacy {
@@ -11,5 +9,9 @@ public class Pharmacy {
         for(Product p : ProductList){
             System.out.println("This pharmacy possesses "+p.Quantity +" "+p.Name +"s. They're "+ p.Product +"s and they cost "+p.Price+"$.");
         }
+    }
+
+    public List<Product> getProductList() {
+        return ProductList;
     }
 }

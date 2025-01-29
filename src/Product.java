@@ -1,5 +1,3 @@
-package src;
-
 public class Product {
     String Name;
     float Price;
@@ -10,5 +8,9 @@ public class Product {
         this.Price = price;
         this.Quantity = quantity;
         this.Product = product;
+    }
+
+    public String getName() {
+        return Name;
     }
 }
