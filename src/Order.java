@@ -1,9 +1,9 @@
 import java.util.Scanner;
 
 public class Order extends Search {
-    private Pharmacy pharmacy;
+    private pharmacie pharmacy;
 
-    public Order(Pharmacy pharmacy) {
+    public Order(pharmacie pharmacy) {
 
         this.pharmacy = pharmacy;
     }
@@ -23,8 +23,8 @@ public class Order extends Search {
         String pSearch = scanner2.nextLine();
         search.Search(pSearch);
 
-        System.out.println("Do you need something else ?");
         for (int i = 0; i < 10; i++) {
+            System.out.println("Do you need something else ?");
             String answer1 = scanner3.nextLine();
             if (answer1.equalsIgnoreCase("yes")) {
                 System.out.println("What do you need more ?");
@@ -32,6 +32,7 @@ public class Order extends Search {
                 search.Search(pSearch1);
             } else if (!answer1.equalsIgnoreCase("yes")){
                 System.out.println("Okay here your order, bye !");
+                break;
             }
         }
     }

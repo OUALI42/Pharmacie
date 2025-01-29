@@ -14,6 +14,6 @@ public class Product extends Inventory {
     }
 
     public String getName() {
-        return Name;
+        return nom;
     }
 }
