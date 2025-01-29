@@ -7,12 +7,11 @@ public class Main {
         ProductList.add(new Product("Doliprane",9.51f,55,"Médicament"));
         ProductList.add(new Product("Ibuprofen",14.94f,55,"Médicament"));
         Pharmacy pharmacy = new Pharmacy(ProductList);
-        Search search = new Search(pharmacy);
-
+        Order order = new Order(pharmacy);
+        
         pharmacy.ShowProducts();
 
-        search.Search("doliprane");
-        search.Search("Ibuprofen");
+        order.Order();
 
     }
 }
