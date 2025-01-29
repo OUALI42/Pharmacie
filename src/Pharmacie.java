@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Pharmacie {
@@ -38,12 +40,14 @@ public class Pharmacie {
     }
 
     void ShowProducts(){
-//        produits.sort(Comparator.comparing(Inventory::getName));
+        List<Product> AllProducts = new ArrayList<Product>();
         for(Inventory invent : produits){
-            for(Product produit : invent.getProduits()){
-                System.out.println(produit.nom+" // Quantité = "+produit.quantiteStock+" // Prix = "+produit.prix+" // Catégorie = "+invent.categorie+" // Sous-Catégorie ="+invent.sousCategorie);
-            }
+            AllProducts.addAll(invent.getProduits());
+        }
+        AllProducts.sort(Comparator.comparing(Product::getNom));
 
+        for(Product produit : AllProducts) {
+            System.out.println(produit.nom + " // Quantité = " + produit.quantiteStock + " // Prix = " + produit.prix + " // Catégorie = " + produit.categorie + " // Sous-Catégorie =" + produit.sousCategorie);
         }
     }
 }
