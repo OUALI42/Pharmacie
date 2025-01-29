@@ -1,9 +1,9 @@
 import java.util.Scanner;
 
 public class Order extends Search {
-    private pharmacie pharmacy;
+    private Pharmacie pharmacy;
 
-    public Order(pharmacie pharmacy) {
+    public Order(Pharmacie pharmacy) {
 
         this.pharmacy = pharmacy;
     }

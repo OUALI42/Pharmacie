@@ -13,7 +13,7 @@ public class Product extends Inventory {
         this.description = description;
     }
 
-    public String getName() {
+    public String getNom() {
         return nom;
     }
 }

@@ -2,9 +2,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Search {
-    private pharmacie pharmacy;
+    private Pharmacie pharmacy;
 
-    public Search(pharmacie pharmacy) {
+    public Search(Pharmacie pharmacy) {
         this.pharmacy = pharmacy;
     }
 

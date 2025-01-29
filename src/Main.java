@@ -10,7 +10,7 @@ public class Main {
         Gson gson = new Gson();
         try (Reader reader = new FileReader("stocks_pharma.json")) {
 
-            pharmacies Pharma = gson.fromJson(reader, pharmacies.class);
+            Pharmacies Pharma = gson.fromJson(reader, Pharmacies.class);
 
             Pharma.pharmacie.ShowProducts();
             Order order = new Order(Pharma.pharmacie);
