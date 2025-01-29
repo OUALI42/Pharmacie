@@ -3,8 +3,6 @@ import com.google.gson.Gson;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,7 +10,7 @@ public class Main {
         Gson gson = new Gson();
         try (Reader reader = new FileReader("stocks_pharma.json")) {
 
-            pharmacies Pharma = gson.fromJson(reader, pharmacies.class);
+            Pharmacies Pharma = gson.fromJson(reader, Pharmacies.class);
 
             Pharma.pharmacie.ShowProducts();
 

@@ -1,14 +1,13 @@
-import java.util.Comparator;
 import java.util.List;
 
-public class pharmacie {
+public class Pharmacie {
     private String nom;
     private String adresse;
     private List<Inventory> produits;
 
 
 
-    pharmacie(String nom, String adresse, List<Inventory> produits) {
+    Pharmacie(String nom, String adresse, List<Inventory> produits) {
         this.nom = nom;
         this.adresse = adresse;
         this.produits = produits;
