@@ -1,13 +1,15 @@
-
-public class Product {
-    String Name;
-    float Price;
-    int Quantity;
-    String Product;
-    Product(String name, float price, int quantity, String product) {
-        this.Name = name;
-        this.Price = price;
-        this.Quantity = quantity;
-        this.Product = product;
+public class Product extends Inventory {
+    int id;
+    String nom;
+    float prix;
+    String quantiteStock;
+    String description;
+    Product(int id, String nom, float prix, String quantiteStock, String description) {
+        super();
+        this.id = id;
+        this.nom = nom;
+        this.prix = prix;
+        this.quantiteStock = quantiteStock;
+        this.description = description;
     }
 }
