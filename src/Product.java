@@ -12,4 +12,8 @@ public class Product extends Inventory {
         this.quantiteStock = quantiteStock;
         this.description = description;
     }
+
+    public String getNom() {
+        return nom;
+    }
 }
