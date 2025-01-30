@@ -28,16 +28,16 @@ public abstract class Users {
 
         System.out.println("Username :");
         String name = namesc.nextLine();
+
         System.out.println("Password :");
         String password = passwordsc.nextLine();
-
-        System.out.println(name);
-        System.out.println(password);
 
         for (int i = 0; i < names.size(); i++) {
             if (names.get(i).equals(name) && passwords.get(i).equals(password)) {
                 System.out.println("You are logged in");
+                break;
             }
+            else System.out.println("This user or your password doesn't exist");
         }
     }
 }

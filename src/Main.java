@@ -8,18 +8,6 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        Gson gson = new Gson();
-        try (Reader reader = new FileReader("stocks_pharma.json")) {
-
-            Pharmacies Pharma = gson.fromJson(reader, Pharmacies.class);
-
-//            Pharma.pharmacie.ShowProducts();
-            Order order = new Order(Pharma.pharmacie);
-            order.Order();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
         Gson PharmacistesGson = new Gson();
         try (Reader reader = new FileReader("stocks_pharma.json")) {
 
@@ -30,16 +18,19 @@ public class Main {
             PharmaNames.add("Liam");
             PharmaPwd.add("ULTRAKILL");
 
+            Pharmacies Pharma = PharmacistesGson.fromJson(reader, Pharmacies.class);
+            Order order = new Order(Pharma.pharmacie);
+            order.Order();
+
             Pharmacist Pharmacists = new Pharmacist(PharmaNames, PharmaPwd);
 //            Pharmacists.Login();
-//            PharmacistesGson.toJson(reader, Pharmacist.class);
 
             String json = PharmacistesGson.toJson(Pharmacists);
             System.out.println(json);
 
             // Converts Java object to File
             try (Writer writer = new FileWriter("pharmacists.json")) {
-                gson.toJson(Pharmacists, writer);
+                PharmacistesGson.toJson(Pharmacists, writer);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
