@@ -47,7 +47,7 @@ public class Pharmacie {
         AllProducts.sort(Comparator.comparing(Product::getNom));
 
         for(Product produit : AllProducts) {
-            System.out.println(produit.nom + " // Quantité = " + produit.quantiteStock + " // Prix = " + produit.prix + " // Catégorie = " + produit.categorie + " // Sous-Catégorie =" + produit.sousCategorie);
+            System.out.println(produit.nom + " // Quantité = " + produit.quantite + " // Prix = " + produit.prix + " // Catégorie = " + produit.categorie + " // Sous-Catégorie =" + produit.sousCategorie);
         }
     }
 }
