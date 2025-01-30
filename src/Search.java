@@ -14,7 +14,7 @@ public class Search {
     protected Search() {
     }
 
-    public String Search(String pSearch) {
+    public int Search(String pSearch) {
         List<Inventory> productList = pharmacy2.getProduits();
         Scanner scanner2 = new Scanner(System.in);
         pSearch = pSearch.toLowerCase();
@@ -27,18 +27,18 @@ public class Search {
                     System.out.println("We have " + prod.quantiteStock + " " + prod.nom + "s left.");
                     System.out.println("How many do you want?");
                     String sc2 = scanner2.nextLine();
-                    if (prod.quantiteStock <= parseInt(sc2)) {
+                    if (prod.quantiteStock < parseInt(sc2)) {
                         System.out.println("Sorry, we don't have enough of this product in stock come back another day or lower the quantity");
                         break;
                     } else if (parseInt(sc2) <= 0){
                         System.out.println("The quantity should be greater than zero");
                         break;
                     }
-                    else return sc2;
+                    else return parseInt(sc2);
                 }
             }
         }
         if (!available) System.out.println("Sorry, we don't have this in stock");
-        return null;
+        return 0;
     }
 }

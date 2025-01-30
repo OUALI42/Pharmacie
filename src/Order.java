@@ -51,10 +51,10 @@ public class Order extends Search {
                 System.out.println("What do you need ?");
                 String pSearch = scanner2.nextLine();
                 pSearch = pSearch.toLowerCase();
-                String nbProduct = search.Search(pSearch);
+                int nbProduct = search.Search(pSearch);
 
                 String Commandes = " ";
-                if (nbProduct != null) {
+                if (nbProduct != 0) {
                     Commandes = "You have ordered " + pSearch;
                 }
 
@@ -67,25 +67,34 @@ public class Order extends Search {
                         String pSearch1 = scanner4.nextLine();
                         nbProduct = search.Search(pSearch1);
 
-                        if (nbProduct != null) {
+                        if (nbProduct != 0) {
                             Commandes = Commandes + pSearch1;
                         }
 
-                    } else if (answer1.contains("no") || answer1.contains("non")) {
-                        System.out.println("Okay here your order, bye !");
-                        System.out.println(Commandes);
+                    } else if (answer1.contains("no") || answer1.contains("non") && nbProduct > 0) {
                         break;
                     }
                 }
+
+                // Retrieve the list of inventories from the pharmacy
                 List<Inventory> productList = pharmacy.getProduits();
+
+                // Iterate through each inventory
                 for (Inventory p : productList) {
+                    // Iterate through each product in the inventory
                     for (Product p1 : p.getProduits()) {
-                        if (p1.nom.toLowerCase().contains(pSearch) && p1.quantiteStock >= parseInt(nbProduct) && parseInt(nbProduct) >0){
-                            p1.quantiteStock -= parseInt(nbProduct);
-                            System.out.println("This product : " + pSearch + " has been ordered");
+                        // Check if the product name contains the search term
+                        // and if the requested quantity is available and greater than 0
+                        if (p1.nom.toLowerCase().contains(pSearch) && p1.quantiteStock >= nbProduct && nbProduct > 0) {
+                            // Reduce the stock quantity by the requested amount
+                            p1.quantiteStock -= nbProduct;
+
+                            // Print confirmation that the product has been ordered
+                            System.out.println("This product: " + pSearch + " has been ordered");
                         }
                     }
                 }
+
                 Pharmacies pharmacys = new Pharmacies(pharmacy);
                 Gson ProduitsGson = new Gson();
 
