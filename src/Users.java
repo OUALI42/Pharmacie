@@ -42,4 +42,9 @@ public abstract class Users {
             }
         }
     }
+
+    public void AddUser(String name, String password) {
+        names.add(name);
+        passwords.add(password);
+    }
 }
