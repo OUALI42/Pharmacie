@@ -1,15 +1,13 @@
+import java.lang.String;
 import java.util.List;
+import java.util.List;
+import java.util.Scanner;
 
 public class Admins extends Users {
-    public Admins(List<String> namePharmacist, List<String> pwdPharmacist) {
-        super(namePharmacist, pwdPharmacist);
+    Users users;
+    public Admins(List<String> nameAdmin, List<String> pwdAdmin) {
+        super(nameAdmin, pwdAdmin);
     }
 
-    public void login (String nameUser, String pwdUser) {
 
-    }
-
-    public void signUp () {
-
-    }
 }

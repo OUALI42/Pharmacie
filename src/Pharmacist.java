@@ -1,3 +1,4 @@
+import java.lang.String;
 import java.util.List;
 
 public class Pharmacist extends Users {
@@ -6,11 +7,4 @@ public class Pharmacist extends Users {
         super(namePharmacist, pwdPharmacist);
     }
 
-    public void login (String nameUser, String pwdUser) {
-
-    }
-
-    public void signUp () {
-
-    }
 }

@@ -1,6 +1,7 @@
 import com.google.gson.Gson;
 
 import java.io.*;
+import java.lang.String;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +14,8 @@ public class Main {
             Pharmacies Pharma = gson.fromJson(reader, Pharmacies.class);
 
 //            Pharma.pharmacie.ShowProducts();
-//            Order order = new Order(Pharma.pharmacie);
-//            order.Order();
+            Order order = new Order(Pharma.pharmacie);
+            order.Order();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -30,6 +31,7 @@ public class Main {
             PharmaPwd.add("ULTRAKILL");
 
             Pharmacist Pharmacists = new Pharmacist(PharmaNames, PharmaPwd);
+//            Pharmacists.Login();
 //            PharmacistesGson.toJson(reader, Pharmacist.class);
 
             String json = PharmacistesGson.toJson(Pharmacists);
