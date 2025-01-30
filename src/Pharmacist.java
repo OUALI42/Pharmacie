@@ -7,4 +7,10 @@ public class Pharmacist extends Users {
         super(namePharmacist, pwdPharmacist);
     }
 
+    @Override
+    public void DeleteUser() {
+        System.out.println("You don't have the required permissions");
+    }
+
+
 }
