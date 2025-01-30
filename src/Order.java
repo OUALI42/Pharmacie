@@ -32,10 +32,21 @@ public class Order extends Search {
             System.out.println("Choose an option :");
             System.out.println("1 - Order");
             System.out.println("2 - Look at the stock");
+            System.out.println(" ");
             String op1 = scanner1.nextLine();
+            System.out.println(" ");
             if (op1.equalsIgnoreCase("2")) {
-                pharmacy.classification();
-            } else if (op1.equalsIgnoreCase("1")) {
+                Pharmacies pharmacys = new Pharmacies(pharmacy);
+                Gson ProduitsGson = new Gson();
+
+                try (Writer writer = new FileWriter("stocks_pharma.json")) {
+                    ProduitsGson.toJson(pharmacys, writer);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                pharmacys.pharmacie.classification();
+            }
+            else if (op1.equalsIgnoreCase("1")) {
                 System.out.println("What do you need ?");
                 String pSearch = scanner2.nextLine();
                 String nbProduct = search.Search(pSearch);
@@ -44,7 +55,6 @@ public class Order extends Search {
                 if (nbProduct != null) {
                     Commandes = "You have ordered " + pSearch;
                 }
-
 
                 for (int i = 0; i < 10; i++) {
                     System.out.println("Do you need something else ?");
@@ -63,7 +73,6 @@ public class Order extends Search {
                         System.out.println(Commandes);
                         break;
                     }
-
                 }
                 List<Inventory> productList = pharmacy.getProduits();
                 for (Inventory p : productList) {
@@ -76,9 +85,6 @@ public class Order extends Search {
                 }
                 Pharmacies pharmacys = new Pharmacies(pharmacy);
                 Gson ProduitsGson = new Gson();
-
-                String json = ProduitsGson.toJson(pharmacys);
-                System.out.println(json);
 
                 // Converts Java object to File
                 try (Writer writer = new FileWriter("stocks_pharma.json")) {

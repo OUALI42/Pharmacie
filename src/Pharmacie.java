@@ -52,13 +52,6 @@ public class Pharmacie {
         }
     }
 
-
-
-
-
-
-
-
     public String warning_message(){
         StringBuilder message = new StringBuilder();
         for (Inventory p : produits) {
@@ -70,7 +63,6 @@ public class Pharmacie {
         }
         return message.toString();
     }
-
 
 
     public void classification() {

@@ -20,14 +20,14 @@ public class Main {
 
             Pharmacies Pharma = PharmacistesGson.fromJson(reader, Pharmacies.class);
             Order order = new Order(Pharma.pharmacie);
-            order.Order();
+//            order.Order();
 
             Pharmacist Pharmacists = new Pharmacist(PharmaNames, PharmaPwd);
-//            Pharmacists.Login();
+            Pharmacists.Login();
 //            PharmacistesGson.toJson(reader, Pharmacist.class);
 
             String json = PharmacistesGson.toJson(Pharmacists);
-            System.out.println(json);
+//            System.out.println(json);
 
             // Converts Java object to File
             try (Writer writer = new FileWriter("pharmacists.json")) {

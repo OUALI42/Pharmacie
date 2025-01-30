@@ -26,6 +26,7 @@ public abstract class Users {
         Scanner namesc = new Scanner(System.in);
         Scanner passwordsc = new Scanner(System.in);
 
+        for (int p = 0; p < 10; p++) {
         System.out.println("Username :");
         String name = namesc.nextLine();
 
@@ -36,8 +37,13 @@ public abstract class Users {
             if (names.get(i).equals(name) && passwords.get(i).equals(password)) {
                 System.out.println("You are logged in");
                 break;
+            } else {
+                System.out.println("This user or your password is incorrect try again");
+                System.out.println(" ");
+                break;
             }
-            else System.out.println("This user or your password doesn't exist");
         }
+        }
+
     }
 }
