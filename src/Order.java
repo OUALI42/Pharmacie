@@ -79,7 +79,7 @@ public class Order extends Search {
                     for (Product p1 : p.getProduits()) {
                         if (p1.nom.equals(pSearch) && p1.quantiteStock >= parseInt(nbProduct)) {
                             p1.quantiteStock -= parseInt(nbProduct);
-                            System.out.println("This product : " + pSearch + "has been ordered");
+                            System.out.println("This product : " + pSearch + " has been ordered");
                         }
                     }
                 }

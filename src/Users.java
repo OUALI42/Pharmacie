@@ -26,24 +26,24 @@ public abstract class Users {
         Scanner namesc = new Scanner(System.in);
         Scanner passwordsc = new Scanner(System.in);
 
-        for (int p = 0; p < 10; p++) {
-        System.out.println("Username :");
-        String name = namesc.nextLine();
+        for (int j = 0; j < names.size(); j++) {
 
-        System.out.println("Password :");
-        String password = passwordsc.nextLine();
+            System.out.println("Username :");
+            String name = namesc.nextLine();
 
-        for (int i = 0; i < names.size(); i++) {
-            if (names.get(i).equals(name) && passwords.get(i).equals(password)) {
-                System.out.println("You are logged in");
-                break;
-            } else {
-                System.out.println("This user or your password is incorrect try again");
-                System.out.println(" ");
-                break;
+            System.out.println("Password :");
+            String password = passwordsc.nextLine();
+
+            for (int i = 0; i < names.size(); i++) {
+                if (names.get(i).equals(name) && passwords.get(i).equals(password)) {
+                    System.out.println("You are logged in");
+                    break;
+                } else {
+                    System.out.println("This user or your password is incorrect try again");
+                    System.out.println(" ");
+                    break;
+                }
             }
         }
-        }
-
     }
 }
