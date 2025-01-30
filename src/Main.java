@@ -69,13 +69,17 @@ public class Main {
         if (currentUser.user.getClass() == Admins.class || currentUser.user.getClass() == Pharmacist.class){
             System.out.println("        1\uFE0F⃣ . Add a product");
         }
+        if (currentUser.user.getClass() == Pharmacist.class){
+            System.out.println("        2\uFE0F⃣ . Look at the stock");
+        }
         if (currentUser.user.getClass() == Admins.class){
             System.out.println("        2\uFE0F⃣ . Delete a user");
             System.out.println("        3\uFE0F⃣ . Add a user");
         }
-        if (currentUser.user.getClass() == Admins.class || currentUser.user.getClass() == Pharmacist.class){
+        if (currentUser.user.getClass() == Admins.class){
             System.out.println("        4\uFE0F⃣ . Look at the stock");
         }
+
         String input = scanner.nextLine();
         if(input.equals("1") && currentUser.user.getClass() == Clients.class){
             order.Order();
@@ -96,13 +100,16 @@ public class Main {
             AddMenu(order,Pharma,Pharmacists,clients,admins,currentUser);
             MenuPrincipal(order,Pharma,Pharmacists,clients,admins,currentUser);
         }
-        else if (input.equals("4") && (currentUser.user.getClass() == Admins.class || currentUser.user.getClass() == Pharmacist.class)) {
+        else if (input.equals("4") && (currentUser.user.getClass() == Admins.class)) {
+            Pharma.pharmacie.classification();
+            MenuPrincipal(order,Pharma,Pharmacists,clients,admins,currentUser);
+        }
+        else if (input.equals("2") && currentUser.user.getClass() == Pharmacist.class) {
             Pharma.pharmacie.classification();
             MenuPrincipal(order,Pharma,Pharmacists,clients,admins,currentUser);
         }
     }
-
-
+    
     public static void MenuConnexion(Order order, Pharmacies Pharma, Pharmacist Pharmacists, Clients clients, Admins admins, CurrentUser currentUser){
         Scanner namesc = new Scanner(System.in);
         Scanner passwordsc = new Scanner(System.in);

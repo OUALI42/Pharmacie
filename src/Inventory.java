@@ -38,12 +38,14 @@ public class Inventory {
             prix = sc.nextFloat();
             if (prix <= 0) {
                 System.out.println("⚠️ Le prix doit être supérieur ou égale 0 !");
+                return;
             }
 
             System.out.print("📦 Entrez la quantité du produit : ");
             quantite = sc.nextInt();
             if (quantite <= 0) {
                 System.out.println("⚠️ La quantité doit être supérieur ou égale à 0 !");
+                return;
             }
 
             System.out.print("📂 Entrez la catégorie du produit : ");

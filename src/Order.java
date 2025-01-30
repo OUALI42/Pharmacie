@@ -13,12 +13,10 @@ import static java.lang.Integer.parseInt;
 public class Order extends Search {
     private Pharmacie pharmacy;
 
-
     public Order(Pharmacie pharmacy) {
 
         this.pharmacy = pharmacy;
     }
-
 
     public void Order () {
         Search search = new Search(pharmacy);
@@ -52,6 +50,7 @@ public class Order extends Search {
             } else if (option.equalsIgnoreCase("1")) {
                 System.out.println("What do you need ?");
                 String pSearch = scanner2.nextLine();
+                pSearch = pSearch.toLowerCase();
                 String nbProduct = search.Search(pSearch);
 
                 String Commandes = " ";
@@ -72,18 +71,16 @@ public class Order extends Search {
                             Commandes = Commandes + pSearch1;
                         }
 
-
                     } else if (answer1.contains("no") || answer1.contains("non")) {
                         System.out.println("Okay here your order, bye !");
                         System.out.println(Commandes);
                         break;
                     }
                 }
-
                 List<Inventory> productList = pharmacy.getProduits();
                 for (Inventory p : productList) {
                     for (Product p1 : p.getProduits()) {
-                        if (p1.nom.equals(pSearch) && p1.quantiteStock >= parseInt(nbProduct) && parseInt(nbProduct) >0){
+                        if (p1.nom.toLowerCase().contains(pSearch) && p1.quantiteStock >= parseInt(nbProduct) && parseInt(nbProduct) >0){
                             p1.quantiteStock -= parseInt(nbProduct);
                             System.out.println("This product : " + pSearch + " has been ordered");
                         }

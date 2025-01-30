@@ -17,11 +17,12 @@ public class Search {
     public String Search(String pSearch) {
         List<Inventory> productList = pharmacy2.getProduits();
         Scanner scanner2 = new Scanner(System.in);
+        pSearch = pSearch.toLowerCase();
 
         boolean available = false;
         for (Inventory p : productList) {
             for(Product prod : p.getProduits()) {
-                if (prod.nom.equalsIgnoreCase(pSearch)) {
+                if (prod.nom.toLowerCase().contains(pSearch)) {
                     available = true;
                     System.out.println("We have " + prod.quantiteStock + " " + prod.nom + "s left.");
                     System.out.println("How many do you want?");
