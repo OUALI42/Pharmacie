@@ -4,6 +4,7 @@ import java.io.*;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
@@ -22,49 +23,27 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        Gson Admingson = new Gson();
         try (Reader readerAdmin = new FileReader("admins.json")) {
-            admin = Admingson.fromJson(readerAdmin, Admins.class);
+            admin = gson.fromJson(readerAdmin, Admins.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        Gson Pharmajson = new Gson();
-        try (Reader readerPharma = new FileReader("admins.json")) {
+        try (Reader readerPharma = new FileReader("pharmacists.json")) {
             pharmacist = gson.fromJson(readerPharma, Pharmacist.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        Gson Clientjson = new Gson();
-        try (Reader readerClient = new FileReader("admins.json")) {
+        try (Reader readerClient = new FileReader("clients.json")) {
             client = gson.fromJson(readerClient, Clients.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        Gson PharmacistesGson = new Gson();
+        CurrentUser Visitor = new CurrentUser("Visitor", new Clients(new ArrayList<>(),new ArrayList<>()));
 
-//            List<String> PharmaNames = new ArrayList<String>();
-//            List<String> PharmaPwd = new ArrayList<String>();
-//            PharmaNames.add("Strauss");
-//            PharmaPwd.add("azerty123");
-//            PharmaNames.add("Liam");
-//            PharmaPwd.add("ULTRAKILL");
-
-//            Pharmacist Pharmacists = new Pharmacist(PharmaNames, PharmaPwd);
-//            Pharmacists.Login();
-//            PharmacistesGson.toJson(reader, Pharmacist.class);
-
-
-
-            CurrentUser Visitor = new CurrentUser("Visitor", new Clients(new ArrayList<>(),new ArrayList<>()));
-
-            MenuPrincipal(order,Pharma,pharmacist,client,admin,Visitor);
-
-            // Converts Java object to File
-
-
+        MenuPrincipal(order,Pharma,pharmacist,client,admin,Visitor);
     }
     public static void MenuPrincipal(Order order, Pharmacies Pharma, Pharmacist Pharmacists, Clients clients, Admins admins, CurrentUser currentUser) {
         final String ANSI_RESET = "\u001B[0m";
@@ -75,7 +54,9 @@ public class Main {
         System.out.println("        You are " + currentUser.getName() + " (" + currentUser.user.getClass().getName() + ")" );
         System.out.println();
         System.out.println("        1 . Order a product");
-        System.out.println("        2 . Connexion");
+        if (Objects.equals(currentUser.getName(), "Visitor")) {
+            System.out.println("        2 . Connexion");
+        }
         if (currentUser.user.getClass() == Admins.class){
             System.out.println("        3 . Delete a user");
         }
@@ -86,9 +67,11 @@ public class Main {
             MenuConnexion(order,Pharma,Pharmacists,clients,admins,currentUser);
         }
         else if (currentUser.user.getClass() == Admins.class && input.equals("3")){
-            currentUser.user.DeleteUser();
+            DeleteMenu(order,Pharma,Pharmacists,clients,admins,currentUser);
         }
     }
+
+
     public static void MenuConnexion(Order order, Pharmacies Pharma, Pharmacist Pharmacists, Clients clients, Admins admins, CurrentUser currentUser){
         Scanner namesc = new Scanner(System.in);
         Scanner passwordsc = new Scanner(System.in);
@@ -97,9 +80,6 @@ public class Main {
         String name = namesc.nextLine();
         System.out.println("Password :");
         String password = passwordsc.nextLine();
-
-        System.out.println(name);
-        System.out.println(password);
 
         boolean Connected = true;
         CurrentUser NewUser = admins.Login(name, password);
@@ -118,5 +98,31 @@ public class Main {
         else{
             MenuPrincipal(order,Pharma,Pharmacists,clients,admins,currentUser);
         }
+    }
+
+
+    public static void DeleteMenu(Order order, Pharmacies Pharma, Pharmacist Pharmacists, Clients clients, Admins admins, CurrentUser currentUser){
+        Scanner Deletesc = new Scanner(System.in);
+        System.out.println("Username of user to delete :");
+        String name = Deletesc.nextLine();
+        clients.DeleteUser(name);
+        Pharmacists.DeleteUser(name);
+        admins.DeleteUser(name);
+
+
+        Gson Gson = new Gson();
+        try (Writer writer = new FileWriter("pharmacists.json")) {
+            Gson.toJson(Pharmacists, writer);
+        } catch (IOException e) {throw new RuntimeException(e);}
+
+        try (Writer writer = new FileWriter("admins.json")) {
+            Gson.toJson(admins, writer);
+        } catch (IOException e) {throw new RuntimeException(e);}
+
+        try (Writer writer = new FileWriter("clients.json")) {
+            Gson.toJson(clients, writer);
+        } catch (IOException e) {throw new RuntimeException(e);}
+
+        MenuPrincipal(order,Pharma,Pharmacists,clients,admins,currentUser);
     }
 }

@@ -32,5 +32,14 @@ public abstract class Users {
         return null;
     }
 
-    public abstract void DeleteUser();
+    public void DeleteUser(String name) {
+        for (int i = 0; i < names.size(); i++) {
+            if (names.get(i).equals(name)) {
+                System.out.println("User "+ names.get(i) +" was successfully deleted");
+                names.remove(i);
+                passwords.remove(i);
+
+            }
+        }
+    }
 }
