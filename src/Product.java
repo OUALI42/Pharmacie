@@ -1,15 +1,17 @@
+import java.lang.String;
+
 public class Product extends Inventory {
     int id;
     String nom;
     float prix;
-    String quantite;
+    int quantiteStock;
     String description;
-    Product(int id, String nom, float prix, String quantite, String description) {
-        //super();
+    Product(int id, String nom, float prix, int quantiteStock, String description) {
+        super();
         this.id = id;
         this.nom = nom;
         this.prix = prix;
-        this.quantite = quantite;
+        this.quantiteStock = quantiteStock;
         this.description = description;
     }
 
@@ -30,11 +32,11 @@ public class Product extends Inventory {
     }
 
     public int getQuantite() {
-        return Integer.parseInt(quantite);
+        return quantiteStock;
     }
 
-    public void setQuantite(String quantite) {
-        this.quantite = quantite;
+    public void setQuantite(int quantiteStock) {
+        this.quantiteStock = quantiteStock;
     }
 
     public String getDescription() {

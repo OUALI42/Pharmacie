@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Inventory {
     String categorie;
     String sousCategorie;
-    private static List<Product> produits;
+    private List<Product> produits;
 
     public Inventory() {
         this.categorie = categorie;
@@ -17,7 +17,7 @@ public class Inventory {
     }
 
 
-    public static void addProduct(Product product) {
+    public void addProduct() {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("1️⃣ Ajouter un produit");
@@ -25,21 +25,24 @@ public class Inventory {
         int choix = sc.nextInt();
         sc.nextLine();
 
+        String nom =null;
+        float prix= 0f;
+        int quantite=0;
+        String description=null;
+
         if (choix == 1) {
             System.out.print("📝 Entrez le nom du produit : ");
-            String nom = sc.nextLine();
+            nom = sc.nextLine();
 
             System.out.print("💰 Entrez le prix du produit : ");
-            String prix = sc.nextLine();
-            Float prixEnChiffre = Float.valueOf(prix);
-            if (prixEnChiffre <= 0) {
+            prix = sc.nextFloat();
+            if (prix <= 0) {
                 System.out.println("⚠️ Le prix doit être supérieur ou égale 0 !");
             }
 
             System.out.print("📦 Entrez la quantité du produit : ");
-            String quantite = sc.nextLine();
-            Integer quantiteEnChiffre = Integer.valueOf(quantite);
-            if (quantiteEnChiffre <= 0) {
+            quantite = sc.nextInt();
+            if (quantite <= 0) {
                 System.out.println("⚠️ La quantité doit être supérieur ou égale à 0 !");
             }
 
@@ -50,13 +53,12 @@ public class Inventory {
             String sousCategorie = sc.nextLine();
 
             System.out.print("📝 Entrez la déscription du produit : ");
-            String description = sc.nextLine();
+            description = sc.nextLine();
         }
-
+        Product product = new Product(7, nom, prix,quantite,description);
         produits.add(product);
         System.out.println("✅ Produit ajouté avec succès !");
 
-        sc.close();
     }
 
 //    public static void delProduct(Product product) {
