@@ -28,13 +28,14 @@ public class Search {
                             scanner2.nextLine();
                             break;
                         }
+                        break;
                     }
                     break;
                 }
+                System.out.println("Sorry, we don't have this in stock");
+                break;
             }
             break;
         }
-        System.out.println("Sorry, we don't have this product in stock.");
     }
-
 }

@@ -32,6 +32,7 @@ public class Order extends Search {
                 search.Search(pSearch1);
             } else if (!answer1.equalsIgnoreCase("yes")){
                 System.out.println("Okay here your order, bye !");
+                System.out.println("");
                 break;
             }
         }
