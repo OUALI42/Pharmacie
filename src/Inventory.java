@@ -20,7 +20,7 @@ public class Inventory {
     public static void addProduct(Product product) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("1️⃣ Afficher l'inventaire");
+        System.out.println("1️⃣ Ajouter un produit");
         System.out.print("👉 Choix : ");
         int choix = sc.nextInt();
         sc.nextLine();
