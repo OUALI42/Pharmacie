@@ -51,12 +51,38 @@ public class Pharmacie {
     }
 
 
+
+
+
+    boolean commande = true;
+
+    public void update_of_command(String nom_of_product,int quantity){
+        if(commande){
+            for (Inventory p : produits){
+                for (Product p1 : p.getProduits()){
+                    if(p1.nom.equals(nom_of_product) && p1.quantiteStock >= quantity){
+                        p1.quantiteStock -= quantity;
+                        System.out.println("This product : " + nom_of_product  + "has been ordered");
+                    }else {
+                        System.out.println("This product : " + nom_of_product  + "has been removed or not found");
+                    }
+                }
+            }
+        }
+        commande = false;
+        System.out.println(warning_message());
+    }
+
+
+
+
+
     public String warning_message(){
         StringBuilder message = new StringBuilder();
         for (Inventory p : produits) {
             for (Product p1 : p.getProduits()) {
                 if (p1.quantiteStock <= 30) {
-                    message.append(p1.nom).append("is too low!\n");
+                    message.append(p1.nom).append(" is too low!\n");
                 }
             }
         }
