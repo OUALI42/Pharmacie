@@ -17,8 +17,6 @@ public class Main {
 
             Pharmacies Pharma = gson.fromJson(reader, Pharmacies.class);
 
-            Pharma.pharmacie.ShowProducts();
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

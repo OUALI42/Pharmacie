@@ -39,11 +39,45 @@ public class Pharmacie {
         this.produits = produits;
     }
 
+//        public static void menu() {
+//
+//        Scanner sc = new Scanner(System.in);
+//
+//        System.out.println("1️⃣ Afficher l'inventaire");
+//        System.out.println("2️⃣ Ajouter un produit");
+//        System.out.println("3️⃣ Supprimer un produit");
+//        System.out.println("4️⃣ Quitter");
+//        System.out.print("👉 Choix : ");
+//
+//        int choix = sc.nextInt();
+//
+//        sc.nextLine();
+//
+//        if (choix == 1){
+//
+//        }
+//
+//        if (choix == 2){
+//          Inventory.addProduct((Product) produits);
+//        }
+//
+//        if (choix == 3){
+//          Inventory.delProduct((Product) produits);
+//        }
+//
+//        if (choix == 4){
+//        }
+//
+//    }
+
     void ShowProducts(){
         List<Product> AllProducts = new ArrayList<Product>();
         for(Inventory invent : produits){
-            AllProducts.addAll(invent.getProduits());
+            for(Product p : invent.getProduits()){
+                AllProducts.add(p);
+            }
         }
+
         AllProducts.sort(Comparator.comparing(Product::getNom));
 
         for(Product produit : AllProducts) {

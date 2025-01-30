@@ -20,8 +20,7 @@ public class Inventory {
     public static void addProduct(Product product) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("1️⃣ Ajouter un produit");
-        System.out.println("2️⃣ Afficher l'inventaire");
+        System.out.println("1️⃣ Afficher l'inventaire");
         System.out.print("👉 Choix : ");
         int choix = sc.nextInt();
         sc.nextLine();
@@ -32,15 +31,15 @@ public class Inventory {
 
             System.out.print("💰 Entrez le prix du produit : ");
             String prix = sc.nextLine();
-            Integer prixEnChiffre = Integer.valueOf(prix);
-            if (product.getPrix() <= 0) {
+            Float prixEnChiffre = Float.valueOf(prix);
+            if (prixEnChiffre <= 0) {
                 System.out.println("⚠️ Le prix doit être supérieur ou égale 0 !");
             }
 
             System.out.print("📦 Entrez la quantité du produit : ");
             String quantite = sc.nextLine();
             Integer quantiteEnChiffre = Integer.valueOf(quantite);
-            if (product.getQuantite() <= 0) {
+            if (quantiteEnChiffre <= 0) {
                 System.out.println("⚠️ La quantité doit être supérieur ou égale à 0 !");
             }
 
@@ -57,16 +56,20 @@ public class Inventory {
         produits.add(product);
         System.out.println("✅ Produit ajouté avec succès !");
 
-        if (choix == 2) {
-            afficherInventaire();
-        }
-
         sc.close();
     }
 
-    public static void afficherInventaire() {
-        if (produits.isEmpty()) {
-            System.out.println("📭 L'inventaire est vide.");
-        }
-    }
+//    public static void delProduct(Product product) {
+//
+//        Scanner sc = new Scanner(System.in);
+//        int choix = sc.nextInt();
+//
+//        sc.nextLine();
+//
+//        if (choix == 3){
+//
+//        }
+//
+//    }
+
 }
