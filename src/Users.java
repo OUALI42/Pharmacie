@@ -22,27 +22,22 @@ public abstract class Users {
     public Users () {
     }
 
-    public void Login () {
-        Scanner namesc = new Scanner(System.in);
-        Scanner passwordsc = new Scanner(System.in);
+    public CurrentUser Login (String name, String password) {
+        for (int i = 0; i < names.size(); i++) {
+            if (names.get(i).equals(name) && passwords.get(i).equals(password)) {
+                System.out.println("You are logged in");
+                return new CurrentUser(name, this);
+            }
+        }
+        return null;
+    }
 
-        for (int j = 0; j < names.size(); j++) {
-
-            System.out.println("Username :");
-            String name = namesc.nextLine();
-
-            System.out.println("Password :");
-            String password = passwordsc.nextLine();
-
-            for (int i = 0; i < names.size(); i++) {
-                if (names.get(i).equals(name) && passwords.get(i).equals(password)) {
-                    System.out.println("You are logged in");
-                    break;
-                } else {
-                    System.out.println("This user or your password is incorrect try again");
-                    System.out.println(" ");
-                    break;
-                }
+    public void DeleteUser(String name) {
+        for (int i = 0; i < names.size(); i++) {
+            if (names.get(i).equals(name)) {
+                System.out.println("User "+ names.get(i) +" was successfully deleted");
+                names.remove(i);
+                passwords.remove(i);
             }
         }
     }

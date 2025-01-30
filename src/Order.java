@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.lang.String;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -29,13 +30,14 @@ public class Order extends Search {
 
         for (int j = 0; j < 10; j++) {
             System.out.println(" ");
-            System.out.println("Choose an option :");
+            System.out.println("    \u001B[32m" + "Choose an option : " + "\u001B[0m");
             System.out.println("1 - Order");
             System.out.println("2 - Look at the stock");
+            System.out.println("3 - Exit");
             System.out.println(" ");
-            String op1 = scanner1.nextLine();
+            String option = scanner1.nextLine();
             System.out.println(" ");
-            if (op1.equalsIgnoreCase("2")) {
+            if (option.equalsIgnoreCase("2")) {
                 Pharmacies pharmacys = new Pharmacies(pharmacy);
                 Gson ProduitsGson = new Gson();
 
@@ -45,8 +47,9 @@ public class Order extends Search {
                     throw new RuntimeException(e);
                 }
                 pharmacys.pharmacie.classification();
-            }
-            else if (op1.equalsIgnoreCase("1")) {
+            } else if (option.equalsIgnoreCase("3")) {
+                return;
+            } else if (option.equalsIgnoreCase("1")) {
                 System.out.println("What do you need ?");
                 String pSearch = scanner2.nextLine();
                 String nbProduct = search.Search(pSearch);
