@@ -67,9 +67,11 @@ public class Order extends Search {
                         System.out.println("What do you need more ?");
                         String pSearch1 = scanner4.nextLine();
                         nbProduct = search.Search(pSearch1);
+
                         if (nbProduct != null) {
                             Commandes = Commandes + pSearch1;
                         }
+
 
                     } else if (answer1.contains("no") || answer1.contains("non")) {
                         System.out.println("Okay here your order, bye !");
@@ -77,10 +79,11 @@ public class Order extends Search {
                         break;
                     }
                 }
+
                 List<Inventory> productList = pharmacy.getProduits();
                 for (Inventory p : productList) {
                     for (Product p1 : p.getProduits()) {
-                        if (p1.nom.equals(pSearch) && p1.quantiteStock >= parseInt(nbProduct)) {
+                        if (p1.nom.equals(pSearch) && p1.quantiteStock >= parseInt(nbProduct) && parseInt(nbProduct) >0){
                             p1.quantiteStock -= parseInt(nbProduct);
                             System.out.println("This product : " + pSearch + " has been ordered");
                         }

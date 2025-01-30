@@ -8,6 +8,4 @@ public class Admins extends Users {
         super(nameAdmin, pwdAdmin);
     }
 
-
-
 }

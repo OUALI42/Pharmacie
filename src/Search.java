@@ -29,7 +29,11 @@ public class Search {
                     if (prod.quantiteStock <= parseInt(sc2)) {
                         System.out.println("Sorry, we don't have enough of this product in stock come back another day or lower the quantity");
                         break;
-                    } else return sc2;
+                    } else if (parseInt(sc2) <= 0){
+                        System.out.println("The quantity should be greater than zero");
+                        break;
+                    }
+                    else return sc2;
                 }
             }
         }
