@@ -3,17 +3,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Search {
-    private Pharmacie pharmacy;
+    private Pharmacie pharmacy2;
 
-    public Search(Pharmacie pharmacy) {
-        this.pharmacy = pharmacy;
+    public Search(Pharmacie pharmacy2) {
+        this.pharmacy2 = pharmacy2;
     }
 
     protected Search() {
     }
 
-    public boolean Search(String pSearch) {
-        List<Inventory> productList = pharmacy.getProduits();
+    public String Search(String pSearch) {
+        List<Inventory> productList = pharmacy2.getProduits();
         Scanner scanner1 = new Scanner(System.in);
         Scanner scanner2 = new Scanner(System.in);
 
@@ -28,14 +28,14 @@ public class Search {
                         String answer1 = scanner1.nextLine();
                         if (answer1.equalsIgnoreCase("yes")) {
                             System.out.println("How many ?");
-                            scanner2.nextLine();
-                            return available;
+                            String sc2 = scanner2.nextLine();
+                            return sc2;
                         }
                     }
                 }
             }
         }
         if (!available) System.out.println("Sorry, we don't have this in stock");
-        return available;
+        return null;
     }
 }

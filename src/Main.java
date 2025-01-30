@@ -13,13 +13,11 @@ public class Main {
 
             Pharmacies Pharma = gson.fromJson(reader, Pharmacies.class);
 
-//            Pharma.pharmacie.ShowProducts();
-            Pharma.pharmacie.classification();
-            Pharma.pharmacie.update_of_command("Tramadol",10);
+            Pharma.pharmacie.ShowProducts();
 
-//            Pharma.pharmacie.ShowProducts();
             Order order = new Order(Pharma.pharmacie);
             order.Order();
+            Pharma.pharmacie.classification();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -1,13 +1,23 @@
+import com.google.gson.Gson;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.lang.String;
+import java.util.List;
 import java.util.Scanner;
+
+import static java.lang.Integer.parseInt;
 
 public class Order extends Search {
     private Pharmacie pharmacy;
+
 
     public Order(Pharmacie pharmacy) {
 
         this.pharmacy = pharmacy;
     }
+
 
     public void Order () {
         Search search = new Search(pharmacy);
@@ -22,11 +32,10 @@ public class Order extends Search {
 
         System.out.println("What do you need ?");
         String pSearch = scanner2.nextLine();
-        boolean Available = search.Search(pSearch);
+        String nbProduct = search.Search(pSearch);
 
         String Commandes = "Vous avez commandé : ";
-        System.out.println(Available);
-        if (Available) {
+        if (nbProduct != null) {
             Commandes = Commandes+" "+pSearch;
         }
 
@@ -38,9 +47,8 @@ public class Order extends Search {
             if (answer1.equalsIgnoreCase("yes")) {
                 System.out.println("What do you need more ?");
                 String pSearch1 = scanner4.nextLine();
-                Available = search.Search(pSearch1);
-                System.out.println(Available);
-                if (Available) {
+                nbProduct = search.Search(pSearch1);
+                if (nbProduct != null) {
                     Commandes = Commandes + pSearch1;
                 }
 
@@ -50,5 +58,27 @@ public class Order extends Search {
                 break;
             }
         }
+        List<Inventory> productList = pharmacy.getProduits();
+        for (Inventory p : productList){
+            for (Product p1 : p.getProduits()){
+                if(p1.nom.equals(pSearch) && p1.quantiteStock >= parseInt(nbProduct)){
+                    p1.quantiteStock -= parseInt(nbProduct);
+                    System.out.println("This product : " + pSearch  + "has been ordered");
+                }
+            }
+        }
+        Pharmacies pharmacys = new Pharmacies(pharmacy);
+        Gson ProduitsGson = new Gson();
+
+        String json = ProduitsGson.toJson(pharmacys);
+        System.out.println(json);
+
+        // Converts Java object to File
+        try (Writer writer = new FileWriter("stocks_pharma.json")) {
+            ProduitsGson.toJson(pharmacys, writer);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
+
 }

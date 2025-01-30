@@ -2,11 +2,13 @@ import java.util.ArrayList;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Scanner;
 
 public class Pharmacie {
     private String nom;
     private String adresse;
     private List<Inventory> produits;
+    Order order;
 
     Pharmacie(String nom, String adresse, List<Inventory> produits) {
         this.nom = nom;
@@ -52,26 +54,6 @@ public class Pharmacie {
 
 
 
-
-
-    boolean commande = true;
-
-    public void update_of_command(String nom_of_product,int quantity){
-        if(commande){
-            for (Inventory p : produits){
-                for (Product p1 : p.getProduits()){
-                    if(p1.nom.equals(nom_of_product) && p1.quantiteStock >= quantity){
-                        p1.quantiteStock -= quantity;
-                        System.out.println("This product : " + nom_of_product  + "has been ordered");
-                    }else {
-                        System.out.println("This product : " + nom_of_product  + "has been removed or not found");
-                    }
-                }
-            }
-        }
-        commande = false;
-        System.out.println(warning_message());
-    }
 
 
 
