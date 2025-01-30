@@ -48,57 +48,59 @@ public class Main {
     public static void MenuPrincipal(Order order, Pharmacies Pharma, Pharmacist Pharmacists, Clients clients, Admins admins, CurrentUser currentUser) {
         final String ANSI_RESET = "\u001B[0m";
         final String ANSI_YELLOW = "\u001B[33m";
+        while (true) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println();
+            System.out.println();
+            System.out.println(ANSI_YELLOW + "           ██-----██-███████-██-------██████--██████--███----███-███████-----████████--██████-------██████--██----██-██████------██████--██---██--█████--██████--███----███--█████---██████-██----██\n" +
+                    "           ██-----██-██------██------██------██----██-████--████-██-------------██----██----██-----██----██-██----██-██---██-----██---██-██---██-██---██-██---██-████--████-██---██-██-------██--██\n" +
+                    "           ██--█--██-█████---██------██------██----██-██-████-██-█████----------██----██----██-----██----██-██----██-██████------██████--███████-███████-██████--██-████-██-███████-██--------████\n" +
+                    "           ██-███-██-██------██------██------██----██-██--██--██-██-------------██----██----██-----██----██-██----██-██---██-----██------██---██-██---██-██---██-██--██--██-██---██-██---------██\n" +
+                    "           -███-███--███████-███████--██████--██████--██------██-███████--------██-----██████-------██████---██████--██---██-----██------██---██-██---██-██---██-██------██-██---██--██████----██" + ANSI_RESET);
+            System.out.println();
+            System.out.println("        You are " + currentUser.getName() + " (" + currentUser.user.getClass().getName() + ")");
+            System.out.println();
 
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.println();
-        System.out.println();
-        System.out.println(ANSI_YELLOW + "           ██-----██-███████-██-------██████--██████--███----███-███████-----████████--██████-------██████--██----██-██████------██████--██---██--█████--██████--███----███--█████---██████-██----██\n" +
-                "           ██-----██-██------██------██------██----██-████--████-██-------------██----██----██-----██----██-██----██-██---██-----██---██-██---██-██---██-██---██-████--████-██---██-██-------██--██\n" +
-                "           ██--█--██-█████---██------██------██----██-██-████-██-█████----------██----██----██-----██----██-██----██-██████------██████--███████-███████-██████--██-████-██-███████-██--------████\n" +
-                "           ██-███-██-██------██------██------██----██-██--██--██-██-------------██----██----██-----██----██-██----██-██---██-----██------██---██-██---██-██---██-██--██--██-██---██-██---------██\n" +
-                "           -███-███--███████-███████--██████--██████--██------██-███████--------██-----██████-------██████---██████--██---██-----██------██---██-██---██-██---██-██------██-██---██--██████----██" + ANSI_RESET);
-        System.out.println();
-        System.out.println("        You are " + currentUser.getName() + " (" + currentUser.user.getClass().getName() + ")" );
-        System.out.println();
-
-        if (currentUser.user.getClass() == Clients.class) {
-            System.out.println("        1\uFE0F⃣ . Order a product");
-            System.out.println("        2\uFE0F⃣ . Connexion");
-        }
-        if (currentUser.user.getClass() == Admins.class || currentUser.user.getClass() == Pharmacist.class){
-            System.out.println("        1\uFE0F⃣ . Add a product");
-        }
-        if (currentUser.user.getClass() == Admins.class){
-            System.out.println("        2\uFE0F⃣ . Delete a user");
-            System.out.println("        3\uFE0F⃣ . Add a user");
-        }
-        if (currentUser.user.getClass() == Admins.class || currentUser.user.getClass() == Pharmacist.class){
-            System.out.println("        4\uFE0F⃣ . Look at the stock");
-        }
-        String input = scanner.nextLine();
-        if(input.equals("1") && currentUser.user.getClass() == Clients.class){
-            order.Order();
-            MenuPrincipal(order,Pharma,Pharmacists,clients,admins,currentUser);
+            if (currentUser.user.getClass() == Clients.class) {
+                System.out.println("        1\uFE0F⃣ . Order a product");
+                System.out.println("        2\uFE0F⃣ . Connexion");
             }
-        else if(input.equals("2") && currentUser.user.getClass() == Clients.class){
-            MenuConnexion(order,Pharma,Pharmacists,clients,admins,currentUser);
-        }
-        else if (input.equals("1") && (currentUser.user.getClass() == Admins.class || currentUser.user.getClass() == Pharmacist.class)){
-            Pharma.pharmacie.getProduits().get(0).addProduct();
-            MenuPrincipal(order,Pharma,Pharmacists,clients,admins,currentUser);
-        }
-        else if (currentUser.user.getClass() == Admins.class && input.equals("2")){
-            DeleteMenu(order,Pharma,Pharmacists,clients,admins,currentUser);
-            MenuPrincipal(order,Pharma,Pharmacists,clients,admins,currentUser);
-        }
-        else if (currentUser.user.getClass() == Admins.class && input.equals("3")){
-            AddMenu(order,Pharma,Pharmacists,clients,admins,currentUser);
-            MenuPrincipal(order,Pharma,Pharmacists,clients,admins,currentUser);
-        }
-        else if (input.equals("4") && (currentUser.user.getClass() == Admins.class || currentUser.user.getClass() == Pharmacist.class)) {
-            Pharma.pharmacie.classification();
-            MenuPrincipal(order,Pharma,Pharmacists,clients,admins,currentUser);
+            if (currentUser.user.getClass() == Admins.class || currentUser.user.getClass() == Pharmacist.class) {
+                System.out.println("        1\uFE0F⃣ . Add / Remove a product");
+            }
+            if (currentUser.user.getClass() == Admins.class) {
+                System.out.println("        2\uFE0F⃣ . Delete a user");
+                System.out.println("        3\uFE0F⃣ . Add a user");
+            }
+            if (currentUser.user.getClass() == Admins.class || currentUser.user.getClass() == Pharmacist.class) {
+                System.out.println("        4\uFE0F⃣ . Look at the stock");
+            }
+            System.out.println();
+            System.out.println("        0\uFE0F⃣ . Quit");
+            String input = scanner.nextLine();
+            if (input.equals("1") && currentUser.user.getClass() == Clients.class) {
+                System.out.println("yamero");
+                order.Order();
+                MenuPrincipal(order, Pharma, Pharmacists, clients, admins, currentUser);
+            } else if (input.equals("2") && currentUser.user.getClass() == Clients.class) {
+                MenuConnexion(order, Pharma, Pharmacists, clients, admins, currentUser);
+            } else if (input.equals("1") && (currentUser.user.getClass() == Admins.class || currentUser.user.getClass() == Pharmacist.class)) {
+                MenuAddProduct(order, Pharma, Pharmacists, clients, admins, currentUser);
+                MenuPrincipal(order, Pharma, Pharmacists, clients, admins, currentUser);
+            } else if (currentUser.user.getClass() == Admins.class && input.equals("2")) {
+                DeleteUserMenu(order, Pharma, Pharmacists, clients, admins, currentUser);
+                MenuPrincipal(order, Pharma, Pharmacists, clients, admins, currentUser);
+            } else if (currentUser.user.getClass() == Admins.class && input.equals("3")) {
+                AddUserMenu(order, Pharma, Pharmacists, clients, admins, currentUser);
+                MenuPrincipal(order, Pharma, Pharmacists, clients, admins, currentUser);
+            } else if (input.equals("4") && (currentUser.user.getClass() == Admins.class || currentUser.user.getClass() == Pharmacist.class)) {
+                Pharma.pharmacie.ShowProducts();
+                MenuPrincipal(order, Pharma, Pharmacists, clients, admins, currentUser);
+            } else if (input.equals("0")) {
+                return;
+            } else {
+                System.out.println("Incorrect input. Try again.");
+            }
         }
     }
 
@@ -134,7 +136,7 @@ public class Main {
     }
 
 
-    public static void DeleteMenu(Order order, Pharmacies Pharma, Pharmacist Pharmacists, Clients clients, Admins admins, CurrentUser currentUser){
+    public static void DeleteUserMenu(Order order, Pharmacies Pharma, Pharmacist Pharmacists, Clients clients, Admins admins, CurrentUser currentUser){
         Scanner Deletesc = new Scanner(System.in);
         System.out.println("Username of user to delete :");
         String name = Deletesc.nextLine();
@@ -158,7 +160,7 @@ public class Main {
 
         MenuPrincipal(order,Pharma,Pharmacists,clients,admins,currentUser);
     }
-    public static void AddMenu(Order order, Pharmacies Pharma, Pharmacist Pharmacists, Clients clients, Admins admins, CurrentUser currentUser){
+    public static void AddUserMenu(Order order, Pharmacies Pharma, Pharmacist Pharmacists, Clients clients, Admins admins, CurrentUser currentUser){
         Scanner namesc = new Scanner(System.in);
         Scanner passwordsc = new Scanner(System.in);
         Scanner hierarchysc = new Scanner(System.in);
@@ -192,4 +194,17 @@ public class Main {
 
         MenuPrincipal(order,Pharma,Pharmacists,clients,admins,currentUser);
     }
+
+
+    public static void MenuAddProduct(Order order, Pharmacies Pharma, Pharmacist Pharmacists, Clients clients, Admins admins, CurrentUser currentUser){
+        Pharma.pharmacie.addProduct();
+
+        Gson Gson = new Gson();
+        try (Writer writer = new FileWriter("stocks_pharma.json")) {
+            Gson.toJson(Pharma, writer);
+        } catch (IOException e) {throw new RuntimeException(e);}
+
+        MenuPrincipal(order,Pharma,Pharmacists,clients,admins,currentUser);
+    }
+
 }
