@@ -24,6 +24,7 @@ public class Main {
 
             Pharmacist Pharmacists = new Pharmacist(PharmaNames, PharmaPwd);
 //            Pharmacists.Login();
+//            PharmacistesGson.toJson(reader, Pharmacist.class);
 
             String json = PharmacistesGson.toJson(Pharmacists);
             System.out.println(json);
