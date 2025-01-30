@@ -47,10 +47,10 @@ public class Main {
     }
     public static void MenuPrincipal(Order order, Pharmacies Pharma, Pharmacist Pharmacists, Clients clients, Admins admins, CurrentUser currentUser) {
         final String ANSI_RESET = "\u001B[0m";
-        final String ANSI_GREEN = "\u001B[32m";
+        final String ANSI_YELLOW = "\u001B[33m";
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println(ANSI_GREEN + "           ██-----██-███████-██-------██████--██████--███----███-███████-----████████--██████-------██████--██----██-██████------██████--██---██--█████--██████--███----███--█████---██████-██----██\n" +
+        System.out.println(ANSI_YELLOW + "           ██-----██-███████-██-------██████--██████--███----███-███████-----████████--██████-------██████--██----██-██████------██████--██---██--█████--██████--███----███--█████---██████-██----██\n" +
                 "           ██-----██-██------██------██------██----██-████--████-██-------------██----██----██-----██----██-██----██-██---██-----██---██-██---██-██---██-██---██-████--████-██---██-██-------██--██\n" +
                 "           ██--█--██-█████---██------██------██----██-██-████-██-█████----------██----██----██-----██----██-██----██-██████------██████--███████-███████-██████--██-████-██-███████-██--------████\n" +
                 "           ██-███-██-██------██------██------██----██-██--██--██-██-------------██----██----██-----██----██-██----██-██---██-----██------██---██-██---██-██---██-██--██--██-██---██-██---------██\n" +
@@ -64,6 +64,9 @@ public class Main {
         if (currentUser.user.getClass() == Admins.class){
             System.out.println("        3 . Delete a user");
         }
+        if (currentUser.user.getClass() == Admins.class){
+            System.out.println("        4 . Add a user");
+        }
         String input = scanner.nextLine();
         if(input.equals("1")){ order.Order();
             MenuPrincipal(order,Pharma,Pharmacists,clients,admins,currentUser);}
@@ -72,6 +75,9 @@ public class Main {
         }
         else if (currentUser.user.getClass() == Admins.class && input.equals("3")){
             DeleteMenu(order,Pharma,Pharmacists,clients,admins,currentUser);
+        }
+        else if (currentUser.user.getClass() == Admins.class && input.equals("4")){
+            AddMenu(order,Pharma,Pharmacists,clients,admins,currentUser);
         }
     }
 
@@ -115,6 +121,40 @@ public class Main {
         Pharmacists.DeleteUser(name);
         admins.DeleteUser(name);
 
+
+        Gson Gson = new Gson();
+        try (Writer writer = new FileWriter("pharmacists.json")) {
+            Gson.toJson(Pharmacists, writer);
+        } catch (IOException e) {throw new RuntimeException(e);}
+
+        try (Writer writer = new FileWriter("admins.json")) {
+            Gson.toJson(admins, writer);
+        } catch (IOException e) {throw new RuntimeException(e);}
+
+        try (Writer writer = new FileWriter("clients.json")) {
+            Gson.toJson(clients, writer);
+        } catch (IOException e) {throw new RuntimeException(e);}
+
+        MenuPrincipal(order,Pharma,Pharmacists,clients,admins,currentUser);
+    }
+    public static void AddMenu(Order order, Pharmacies Pharma, Pharmacist Pharmacists, Clients clients, Admins admins, CurrentUser currentUser){
+        Scanner namesc = new Scanner(System.in);
+        Scanner passwordsc = new Scanner(System.in);
+        Scanner hierarchysc = new Scanner(System.in);
+
+        System.out.println("New user Username :");
+        String name = namesc.nextLine();
+        System.out.println("New user Password :");
+        String password = passwordsc.nextLine();
+        System.out.println("User permissions ( 1 :Client / 2 :Pharmacist / 3 :Admins ) :");
+        String hierarchy = hierarchysc.nextLine();
+
+        switch (hierarchy) {
+            case "1" -> clients.AddUser(name, password);
+            case "2" -> Pharmacists.AddUser(name, password);
+            case "3" -> admins.AddUser(name, password);
+            default -> System.out.println("Saisie incorrecte");
+        }
 
         Gson Gson = new Gson();
         try (Writer writer = new FileWriter("pharmacists.json")) {
