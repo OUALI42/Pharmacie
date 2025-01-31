@@ -223,14 +223,14 @@ public class Pharmacie {
             }
         }
         else if (choix == 2) {
-            RemoveProduct();
+            removeProduct();
         }
         else {
             System.out.println("Incorrect input");
         }
     }
 
-    public void RemoveProduct() {
+    public void removeProduct() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Nom du produit à retirer :");
         String nom = sc.nextLine();
