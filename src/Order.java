@@ -90,7 +90,7 @@ public class Order extends Search {
                             p1.quantiteStock -= nbProduct;
 
                             // Print confirmation that the product has been ordered
-                            System.out.println("This product: " + pSearch + " has been ordered");
+//                            System.out.println("This product: " + pSearch + " has been ordered");
                         }
                     }
                 }

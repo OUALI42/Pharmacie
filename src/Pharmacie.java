@@ -106,73 +106,88 @@ public class Pharmacie implements Stockable{
         System.out.println(warning_message()); // Display of alert message
     }
 
-
+    /**
+     * Method for adding a product from stock.
+     * Products are stored in a list.
+     * The user can choose between adding and deleting a product.
+     * If a product is added, several items of information are requested:
+     * - Product name
+     * - Price
+     * - Quantity
+     * - Description
+     * - Category and sub-category
+     */
     public void addProduct() {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("1️⃣ : Ajouter un produit");
-        System.out.println("2️⃣ : Retirer un produit");
-        System.out.print("👉 Choix : ");
-        int choix = sc.nextInt();
+        // Display menu
+        System.out.println("1️⃣ : Add a product");
+        System.out.println("2️⃣ : Remove a product");
+        System.out.print("👉 Choice : ");
+        int choice = sc.nextInt();
         sc.nextLine();
 
-        String nom;
-        float prix;
-        int quantite;
+        String name;
+        float price;
+        int quantity;
         String description;
-        String categorie;
-        String sousCategorie;
+        String category;
+        String subCategory;
 
-        if (choix == 1) {
+        if (choice == 1) {
             try {
-                System.out.print("📝 Entrez le nom du produit : ");
-                nom = sc.nextLine();
+                // Enter product information
+                System.out.print("📝 Enter product name : ");
+                name = sc.nextLine();
 
-                System.out.print("💰 Entrez le prix du produit (Utilisez une virgule pour les décimales) : ");
-                prix = sc.nextFloat();
-                if (prix <= 0) {
-                    System.out.println("⚠️ Le prix doit être supérieur ou égale 0 !");
+                System.out.print("💰 Enter product price (Use a comma for decimals) : ");
+                price = (float)sc.nextFloat();
+                if (price <= 0) {
+                    System.out.println("⚠️ Price must be greater than or equal to 0!");
                 }
 
-                System.out.print("📦 Entrez la quantité du produit : ");
-                quantite = sc.nextInt();
-                if (quantite <= 0) {
-                    System.out.println("⚠️ La quantité doit être supérieur ou égale à 0 !");
+                System.out.print("📦 Enter product quantity : ");
+                quantity = sc.nextInt();
+                if (quantity <= 0) {
+                    System.out.println("⚠️ Quantity must be greater than or equal to 0!");
                 }
 
-                System.out.print("📂 Entrez la catégorie du produit : ");
+                System.out.print("📂 Enter product category : ");
                 Scanner sc3 = new Scanner(System.in);
-                categorie = sc3.nextLine();
+                category = sc3.nextLine();
 
-                System.out.print("📁 Entrez la sous-catégorie du produit : ");
+                System.out.print("📁 Enter product sub-category : ");
                 Scanner sc2 = new Scanner(System.in);
-                sousCategorie = sc2.nextLine();
+                subCategory = sc2.nextLine();
 
-                System.out.print("📝 Entrez la déscription du produit : ");
+                System.out.print("📝 Enter product description : ");
                 description = sc.nextLine();
 
-                if (nom != null && quantite > 0 && description != null && categorie != null && sousCategorie != null) {
+                // Check data entered
+                if (name!=null && quantity>0 && description!=null && category!=null && subCategory!=null) {
 
                     List<Product> products = new ArrayList<>();
-                    Product product = new Product(7, nom, prix, quantite, description);
+                    Product product = new Product(7, name, price,quantity,description);
                     products.add(product);
-                    Inventory AddInventory = new Inventory(categorie, sousCategorie, products);
+                    Inventory AddInventory = new Inventory(category,subCategory,products);
 
                     boolean NewInventory = true;
                     for (Inventory p : produits) {
-                        if (Objects.equals(p.categorie, categorie) && Objects.equals(p.sousCategorie, sousCategorie)) {
+                        if (Objects.equals(p.categorie, category) && Objects.equals(p.sousCategorie, subCategory)) {
                             AddInventory = p;
                             NewInventory = false;
                         }
                     }
                     if (NewInventory) {
                         produits.add(AddInventory);
-                    } else {
+                    }
+                    else {
                         AddInventory.getProduits().add(product);
                     }
 
-                    System.out.println("✅ Produit ajouté avec succès !");
-                } else {
+                    System.out.println("✅ Product successfully added !");
+                }
+                else {
                     System.out.println("Incorrect value");
                 }
             }
@@ -180,7 +195,8 @@ public class Pharmacie implements Stockable{
                 System.out.println("Incorrect value entered");
             }
         }
-        else if (choix == 2) {
+        else if (choice == 2) {
+            // Call the method for deleting a product
             removeProduct();
         }
         else {
@@ -198,19 +214,24 @@ public class Pharmacie implements Stockable{
     public void removeProduct() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Nom du produit à retirer :");
-        String nom = sc.nextLine().toLowerCase();
+        String nom = sc.nextLine();
+        // Browse inventory
         for (Inventory p : produits) {
+            // Browse inventory products
             for (Product p1 : p.getProduits()) {
-                if (p1.nom.toLowerCase().contains(nom.toLowerCase())) {
+                if (Objects.equals(nom, p1.nom)) {
                     List<Product> newproducts = new ArrayList<>();
+                    // Create a new product list without the product to be deleted
                     for (Product p2 : p.getProduits()) {
-                        if (!p1.nom.toLowerCase().contains(nom.toLowerCase())) {
+                        if (!Objects.equals(nom, p2.nom)) {
                             newproducts.add(p2);
                         }
                     }
+                    // Update inventory with new product list
                     System.out.println("The product "+ nom + " was successfully removed !");
                     p.setProduits(newproducts);
 
+                    // Check if inventory is now empty
                     if (p.getProduits().isEmpty()) {
                         List<Inventory> newInvents = new ArrayList<>();
                         for (Inventory p3 : produits) {
@@ -218,6 +239,7 @@ public class Pharmacie implements Stockable{
                                 newInvents.add(p3);
                             }
                         }
+
                         System.out.println("The category " + p.categorie + " was empty so it was deleted too!");
                         setProduits(newInvents);
                     }
