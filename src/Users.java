@@ -11,17 +11,6 @@ public abstract class Users {
         this.passwords = passwords;
     }
 
-    public List<String> getNameList() {
-        return names;
-    }
-
-    public List<String> getPasswordsList() {
-        return passwords;
-    }
-
-    public Users () {
-    }
-
     public CurrentUser Login (String name, String password) {
         for (int i = 0; i < names.size(); i++) {
             if (names.get(i).equals(name) && passwords.get(i).equals(password)) {

@@ -22,8 +22,4 @@ public class Inventory {
         return produits;
     }
 
-    public void removeObject(Product productRm) {
-        produits.remove(productRm);
-    }
-
 }

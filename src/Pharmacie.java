@@ -106,13 +106,7 @@ public class Pharmacie implements Stockable{
         System.out.println(warning_message()); // Display of alert message
     }
 
-    /**
-     * Add a Product object to the corresponding Inventory
-     * <p>
-     * This method asks the user to define all attributes of a product.
-     * It then adds that product to an inventory if the category and subcategory are already existing
-     * If the inventory does not exist, a new one is created and the product is then added to it
-     */
+
     public void addProduct() {
         Scanner sc = new Scanner(System.in);
 
@@ -194,6 +188,13 @@ public class Pharmacie implements Stockable{
         }
     }
 
+    /**
+     * Removes a Product object
+     * <p>
+     * This method asks the user for the name of a product to remove.
+     * It then searches through the Inventories and the products and removes it if the name matches
+     * If an inventory becomes empty, it's removed too
+     */
     public void removeProduct() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Nom du produit à retirer :");

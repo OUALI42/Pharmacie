@@ -19,32 +19,4 @@ public class Product extends Inventory {
         return nom;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public float getPrix() {
-        return prix;
-    }
-
-    public void setPrix(float prix) {
-        this.prix = prix;
-    }
-
-    public int getQuantite() {
-        return quantiteStock;
-    }
-
-    public void setQuantite(int quantiteStock) {
-        this.quantiteStock = quantiteStock;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
 }
