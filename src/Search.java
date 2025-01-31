@@ -34,7 +34,13 @@ public class Search {
                         System.out.println("The quantity should be greater than zero");
                         break;
                     }
-                    else return parseInt(sc2);
+                    if (prod.quantiteStock >= parseInt(sc2) && parseInt(sc2) > 0) {
+                        // Reduce the stock quantity by the requested amount
+                        prod.quantiteStock -= parseInt(sc2);
+                        // Print confirmation that the product has been ordered
+                        System.out.println("This product: " + pSearch + " has been ordered");
+                        return parseInt(sc2);
+                    }
                 }
             }
         }
