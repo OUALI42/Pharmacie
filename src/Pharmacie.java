@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
-public class Pharmacie {
+public class Pharmacie implements Stockable{
     private String nom;
     private String adresse;
     private List<Inventory> produits;
@@ -18,22 +18,6 @@ public class Pharmacie {
         this.produits = produits;
     }
 
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
-
     public List<Inventory> getProduits() {
         return produits;
     }
@@ -42,36 +26,6 @@ public class Pharmacie {
         this.produits = produits;
     }
 
-//        public static void menu() {
-//
-//        Scanner sc = new Scanner(System.in);
-//
-//        System.out.println("1️⃣ Afficher l'inventaire");
-//        System.out.println("2️⃣ Ajouter un produit");
-//        System.out.println("3️⃣ Supprimer un produit");
-//        System.out.println("4️⃣ Quitter");
-//        System.out.print("👉 Choix : ");
-//
-//        int choix = sc.nextInt();
-//
-//        sc.nextLine();
-//
-//        if (choix == 1){
-//
-//        }
-//
-//        if (choix == 2){
-//          Inventory.addProduct((Product) produits);
-//        }
-//
-//        if (choix == 3){
-//          Inventory.delProduct((Product) produits);
-//        }
-//
-//        if (choix == 4){
-//        }
-//
-//    }
     /**
      * Displays a list of all products sorted by name.
      * <p>
@@ -79,7 +33,7 @@ public class Pharmacie {
      * by name, and then prints each product's details, including name, stock quantity,
      * price, category, and subcategory.
      */
-    void ShowProducts(){
+    public void ShowProducts(){
         for(Inventory invent : produits){
             invent.getProduits().sort(Comparator.comparing(Product::getNom));
         }
@@ -152,6 +106,13 @@ public class Pharmacie {
         System.out.println(warning_message()); // Display of alert message
     }
 
+    /**
+     * Add a Product object to the corresponding Inventory
+     * <p>
+     * This method asks the user to define all attributes of a product.
+     * It then adds that product to an inventory if the category and subcategory are already existing
+     * If the inventory does not exist, a new one is created and the product is then added to it
+     */
     public void addProduct() {
         Scanner sc = new Scanner(System.in);
 
@@ -169,57 +130,60 @@ public class Pharmacie {
         String sousCategorie;
 
         if (choix == 1) {
-            System.out.print("📝 Entrez le nom du produit : ");
-            nom = sc.nextLine();
+            try {
+                System.out.print("📝 Entrez le nom du produit : ");
+                nom = sc.nextLine();
 
-            System.out.print("💰 Entrez le prix du produit (Utilisez une virgule pour les décimales) : ");
-            prix = (float)sc.nextFloat();
-            if (prix <= 0) {
-                System.out.println("⚠️ Le prix doit être supérieur ou égale 0 !");
-            }
+                System.out.print("💰 Entrez le prix du produit (Utilisez une virgule pour les décimales) : ");
+                prix = sc.nextFloat();
+                if (prix <= 0) {
+                    System.out.println("⚠️ Le prix doit être supérieur ou égale 0 !");
+                }
 
-            System.out.print("📦 Entrez la quantité du produit : ");
-            quantite = sc.nextInt();
-            if (quantite <= 0) {
-                System.out.println("⚠️ La quantité doit être supérieur ou égale à 0 !");
-            }
+                System.out.print("📦 Entrez la quantité du produit : ");
+                quantite = sc.nextInt();
+                if (quantite <= 0) {
+                    System.out.println("⚠️ La quantité doit être supérieur ou égale à 0 !");
+                }
 
-            System.out.print("📂 Entrez la catégorie du produit : ");
-            Scanner sc3 = new Scanner(System.in);
-            categorie = sc3.nextLine();
+                System.out.print("📂 Entrez la catégorie du produit : ");
+                Scanner sc3 = new Scanner(System.in);
+                categorie = sc3.nextLine();
 
-            System.out.print("📁 Entrez la sous-catégorie du produit : ");
-            Scanner sc2 = new Scanner(System.in);
-            sousCategorie = sc2.nextLine();
+                System.out.print("📁 Entrez la sous-catégorie du produit : ");
+                Scanner sc2 = new Scanner(System.in);
+                sousCategorie = sc2.nextLine();
 
-            System.out.print("📝 Entrez la déscription du produit : ");
-            description = sc.nextLine();
+                System.out.print("📝 Entrez la déscription du produit : ");
+                description = sc.nextLine();
 
-            if (nom!=null && quantite>0 && description!=null && categorie!=null && sousCategorie!=null) {
+                if (nom != null && quantite > 0 && description != null && categorie != null && sousCategorie != null) {
 
-                List<Product> products = new ArrayList<>();
-                Product product = new Product(7, nom, prix,quantite,description);
-                products.add(product);
-                Inventory AddInventory = new Inventory(categorie,sousCategorie,products);
+                    List<Product> products = new ArrayList<>();
+                    Product product = new Product(7, nom, prix, quantite, description);
+                    products.add(product);
+                    Inventory AddInventory = new Inventory(categorie, sousCategorie, products);
 
-                boolean NewInventory = true;
-                for (Inventory p : produits) {
-                    if (Objects.equals(p.categorie, categorie) && Objects.equals(p.sousCategorie, sousCategorie)) {
-                        AddInventory = p;
-                        NewInventory = false;
+                    boolean NewInventory = true;
+                    for (Inventory p : produits) {
+                        if (Objects.equals(p.categorie, categorie) && Objects.equals(p.sousCategorie, sousCategorie)) {
+                            AddInventory = p;
+                            NewInventory = false;
+                        }
                     }
-                }
-                if (NewInventory) {
-                    produits.add(AddInventory);
-                }
-                else {
-                    AddInventory.getProduits().add(product);
-                }
+                    if (NewInventory) {
+                        produits.add(AddInventory);
+                    } else {
+                        AddInventory.getProduits().add(product);
+                    }
 
-                System.out.println("✅ Produit ajouté avec succès !");
+                    System.out.println("✅ Produit ajouté avec succès !");
+                } else {
+                    System.out.println("Incorrect value");
+                }
             }
-            else {
-                System.out.println("Incorrect value");
+            catch (Exception e) {
+                System.out.println("Incorrect value entered");
             }
         }
         else if (choix == 2) {
@@ -233,13 +197,13 @@ public class Pharmacie {
     public void removeProduct() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Nom du produit à retirer :");
-        String nom = sc.nextLine();
+        String nom = sc.nextLine().toLowerCase();
         for (Inventory p : produits) {
             for (Product p1 : p.getProduits()) {
-                if (Objects.equals(nom, p1.nom)) {
+                if (p1.nom.toLowerCase().contains(nom.toLowerCase())) {
                     List<Product> newproducts = new ArrayList<>();
                     for (Product p2 : p.getProduits()) {
-                        if (!Objects.equals(nom, p2.nom)) {
+                        if (!p1.nom.toLowerCase().contains(nom.toLowerCase())) {
                             newproducts.add(p2);
                         }
                     }

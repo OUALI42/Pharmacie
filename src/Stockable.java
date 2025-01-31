@@ -1,6 +1,7 @@
 public interface Stockable {
 
-    void addProduct(Product product);
-    void afficherInventaire();
+    void addProduct();
+    void ShowProducts();
+    void removeProduct();
 
 }
