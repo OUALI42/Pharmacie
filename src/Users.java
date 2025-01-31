@@ -1,6 +1,5 @@
 import java.lang.String;
 import java.util.List;
-import java.util.Scanner;
 
 public abstract class Users {
     List<String> names;
@@ -11,6 +10,14 @@ public abstract class Users {
         this.passwords = passwords;
     }
 
+    /**
+     * Method to Log in
+     * <p>
+     * This method take in argument a name and password
+     * It then searches through the Users' names and passwords to see if one matches
+     *
+     * @return A CurrentUser Object with the name and rights of the user if the Username and password correspond (null if not)
+     */
     public CurrentUser Login (String name, String password) {
         for (int i = 0; i < names.size(); i++) {
             if (names.get(i).equals(name) && passwords.get(i).equals(password)) {
@@ -21,6 +28,13 @@ public abstract class Users {
         return null;
     }
 
+    /**
+     * Method to delete a user
+     * <p>
+     * This method take in argument a name
+     * It then searches through the Users names
+     * if one match, the name and the corresponding password are deleted from the Users' lists
+     */
     public void DeleteUser(String name) {
         for (int i = 0; i < names.size(); i++) {
             if (names.get(i).equals(name)) {
@@ -31,6 +45,12 @@ public abstract class Users {
         }
     }
 
+    /**
+     * Method to add a user
+     * <p>
+     * This method take in argument a name and a password
+     * It then searches adds them to the Users' name and password lists
+     */
     public void AddUser(String name, String password) {
         names.add(name);
         passwords.add(password);
