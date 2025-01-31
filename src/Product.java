@@ -6,9 +6,9 @@ import java.lang.String;
  */
 public class Product extends Inventory {
     int id;
-    String nom;
-    float prix;
-    int quantiteStock;
+    protected String nom;
+    protected float prix;
+    protected int quantiteStock;
     String description;
     Product(int id, String nom, float prix, int quantiteStock, String description) {
         super();

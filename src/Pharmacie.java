@@ -167,7 +167,7 @@ public class Pharmacie implements Stockable{
                 if (name!=null && quantity>0 && description!=null && category!=null && subCategory!=null) {
 
                     List<Product> products = new ArrayList<>();
-                    Product product = new Product(7, name, price,quantity,description);
+                    Product product = new Product(1, name, price,quantity,description);
                     products.add(product);
                     Inventory AddInventory = new Inventory(category,subCategory,products);
 
@@ -182,6 +182,7 @@ public class Pharmacie implements Stockable{
                         produits.add(AddInventory);
                     }
                     else {
+                        product.id = AddInventory.getProduits().size()+1;
                         AddInventory.getProduits().add(product);
                     }
 
