@@ -79,22 +79,6 @@ public class Order extends Search {
                 // Retrieve the list of inventories from the pharmacy
                 List<Inventory> productList = pharmacy.getProduits();
 
-                // Iterate through each inventory
-                for (Inventory p : productList) {
-                    // Iterate through each product in the inventory
-                    for (Product p1 : p.getProduits()) {
-                        // Check if the product name contains the search term
-                        // and if the requested quantity is available and greater than 0
-                        if (p1.nom.toLowerCase().contains(pSearch) && p1.quantiteStock >= nbProduct && nbProduct > 0) {
-                            // Reduce the stock quantity by the requested amount
-                            p1.quantiteStock -= nbProduct;
-
-                            // Print confirmation that the product has been ordered
-//                            System.out.println("This product: " + pSearch + " has been ordered");
-                        }
-                    }
-                }
-
                 Pharmacies pharmacys = new Pharmacies(pharmacy);
                 Gson ProduitsGson = new Gson();
 
