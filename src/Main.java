@@ -72,7 +72,10 @@ public class Main {
                 System.out.println("        2\uFE0F⃣ . Delete a user");
                 System.out.println("        3\uFE0F⃣ . Add a user");
             }
-            if (currentUser.user.getClass() == Admins.class || currentUser.user.getClass() == Pharmacist.class) {
+            if (currentUser.user.getClass() == Pharmacist.class) {
+                System.out.println("        2\uFE0F⃣ . Look at the stock");
+            }
+            if (currentUser.user.getClass() == Admins.class) {
                 System.out.println("        4\uFE0F⃣ . Look at the stock");
             }
             System.out.println();
@@ -82,21 +85,34 @@ public class Main {
                 System.out.println("yamero");
                 order.Order();
                 MenuPrincipal(order, Pharma, Pharmacists, clients, admins, currentUser);
+                return;
             } else if (input.equals("2") && currentUser.user.getClass() == Clients.class) {
                 MenuConnexion(order, Pharma, Pharmacists, clients, admins, currentUser);
+                return;
             } else if (input.equals("1") && (currentUser.user.getClass() == Admins.class || currentUser.user.getClass() == Pharmacist.class)) {
                 MenuAddProduct(order, Pharma, Pharmacists, clients, admins, currentUser);
                 MenuPrincipal(order, Pharma, Pharmacists, clients, admins, currentUser);
+                return;
             } else if (currentUser.user.getClass() == Admins.class && input.equals("2")) {
                 DeleteUserMenu(order, Pharma, Pharmacists, clients, admins, currentUser);
                 MenuPrincipal(order, Pharma, Pharmacists, clients, admins, currentUser);
+                return;
             } else if (currentUser.user.getClass() == Admins.class && input.equals("3")) {
                 AddUserMenu(order, Pharma, Pharmacists, clients, admins, currentUser);
                 MenuPrincipal(order, Pharma, Pharmacists, clients, admins, currentUser);
-            } else if (input.equals("4") && (currentUser.user.getClass() == Admins.class || currentUser.user.getClass() == Pharmacist.class)) {
+                return;
+
+            }
+            else if (input.equals("2") && currentUser.user.getClass() == Pharmacist.class) {
                 Pharma.pharmacie.ShowProducts();
                 MenuPrincipal(order, Pharma, Pharmacists, clients, admins, currentUser);
+                return;
+            } else if (input.equals("4") && (currentUser.user.getClass() == Admins.class)) {
+                Pharma.pharmacie.ShowProducts();
+                MenuPrincipal(order, Pharma, Pharmacists, clients, admins, currentUser);
+                return;
             } else if (input.equals("0")) {
+                System.out.println("Goodbye !");
                 return;
             } else {
                 System.out.println("Incorrect input. Try again.");
