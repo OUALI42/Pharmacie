@@ -1,5 +1,9 @@
 import java.lang.String;
 
+/**
+ * Class representing a product in the inventory.
+ * Inherits the Inventory class.
+ */
 public class Product extends Inventory {
     int id;
     String nom;

@@ -1,11 +1,13 @@
-import jdk.jfr.Category;
-
 import java.util.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Class representing a pharmacy that manages a stock of products.
+ * It contains information on its name, address and inventory.
+ */
 public class Pharmacie implements Stockable{
     private String nom;
     private String adresse;
@@ -34,10 +36,12 @@ public class Pharmacie implements Stockable{
      * price, category, and subcategory.
      */
     public void ShowProducts(){
+        // Sort products in each inventory alphabetically
         for(Inventory invent : produits){
             invent.getProduits().sort(Comparator.comparing(Product::getNom));
         }
 
+        // Display products sorted by category
         for(Inventory invent : produits){
             System.out.println();
             System.out.println("\u001B[33m"+"Category | " + invent.categorie+" :"+"\u001B[0m");
@@ -47,8 +51,6 @@ public class Pharmacie implements Stockable{
             }
         }
     }
-
-
 
     /**
      * Generates a warning message for products that have a low stock quantity.
@@ -77,8 +79,6 @@ public class Pharmacie implements Stockable{
         // Return the constructed warning message
         return message.toString();
     }
-
-
 
     /** This function shows the stock of our products ranked in an increasing way,
      * with a message if a product has a low quantity **/
